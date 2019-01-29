@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ViewController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { Pot } from '../../../models/Pot';
 import { PotsService } from '../../../services/pots.service';
 import { NgForm } from '@angular/forms';
@@ -21,7 +21,8 @@ export class SinglePotPage implements OnInit {
 
   constructor(public navParams: NavParams,
               private viewCtrl: ViewController,
-              private potsService: PotsService) {
+              private potsService: PotsService,
+              private alertCtrl: AlertController) {
   }
 
   ngOnInit(){
@@ -34,17 +35,32 @@ export class SinglePotPage implements OnInit {
   }
 
   onTogglePot(){
-    this.pot.isOpen = !this.pot.isOpen;
-  }
+    var textError;
+    if (this.pot.isOpen){
+      textError = "Cette action va fermer votre pot";
+    }
+    else{
+      textError = "Cette action va (ré)ouvrir votre pot";
+    }
+    let alert = this.alertCtrl.create({
+      title: 'Êtes-vous certain de vouloir continuer?',
+      subTitle: textError,
+      buttons: [
+        {
+          text: 'Annuler',
+          role: 'cancel'
+        },
+        {
+          text: 'Confimer',
+          handler: () => {this.pot.isOpen = !this.pot.isOpen;}
+        }
+      ]
+    });
+    alert.present();
+}
 
   onSubmitForm(form: NgForm){
     console.log(form.value);
-    this.dismissModal();
-  }
-
-  onDeleteHours(){
-    this.pot.startTime= '';
-    this.pot.endTime='';
     this.dismissModal();
   }
 

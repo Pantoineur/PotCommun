@@ -24,14 +24,15 @@ export class MyApp {
               statusBar: StatusBar,
               splashScreen: SplashScreen,
               private menuCtrl: MenuController) {
-    platform.ready().then(() => {
-        let config = {
-          apiKey: "AIzaSyDGluToyKk5Awv2U2WBrFvhN-xoF7Ody-A",
-          authDomain: "http-client-demo2-b4379.firebaseapp.com",
-          databaseURL: "https://http-client-demo2-b4379.firebaseio.com",
-          projectId: "http-client-demo2-b4379",
-          storageBucket: "http-client-demo2-b4379.appspot.com",
-          messagingSenderId: "449323791410"
+              platform.ready().then(() => {
+
+        var config = {
+          apiKey: "AIzaSyCrSH1x3INykjqlTd5ZkbzjujygFwAP01I",
+          authDomain: "projet-potcom.firebaseapp.com",
+          databaseURL: "https://projet-potcom.firebaseio.com",
+          projectId: "projet-potcom",
+          storageBucket: "projet-potcom.appspot.com",
+          messagingSenderId: "476184892726"
         };
         firebase.initializeApp(config);
         firebase.auth().onAuthStateChanged(

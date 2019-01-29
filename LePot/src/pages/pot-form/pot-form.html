@@ -22,8 +22,19 @@
           <ion-input [formControlName]="i" placeholder="{{ i+1 }}."></ion-input>
         </ion-item>
       </div>
+      <button ion-button full (click)="onAddDescription()">Ajouter une ligne</button>
+      <ion-item-divider>Ajouter des membres</ion-item-divider>
+      <div formArrayName="membres">
+        <ion-item *ngFor="let control of getMembresArray().controls; let i = index">
+          <ion-icon item-start
+            name="remove-circle"
+            color="danger"
+            (click)="onRemoveMembres(i)"></ion-icon>
+            <ion-input [formControlName]="i" placeholder="{{ i+1 }}."></ion-input>
+        </ion-item>
+      </div>
     </ion-list>
-    <button ion-button full (click)="onAddDescription()">Ajouter une ligne</button>
+    <button ion-button full (click)="onAddMembres()">Ajouter un membre</button>
     <button ion-button full color="secondary" (click)="onSubmitForm()">Enregistrer</button>
   </form>
 </ion-content>

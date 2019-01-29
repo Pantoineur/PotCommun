@@ -16,6 +16,7 @@ export class PotsPage implements OnInit, OnDestroy{
   potsList: Pot[];
   potsSubscription: Subscription;
 
+
   constructor(private modalCtrl: ModalController,
               private potsService: PotsService,
               private menuCtrl: MenuController,
