@@ -1,4 +1,4 @@
-page-single-appareil {
+page-single-pot {
     .is-on {
       ion-card-content, ion-card-header, ion-grid {
         background-color: color($colors, secondary-light);
@@ -9,4 +9,13 @@ page-single-appareil {
         background-color: color($colors, danger-light);
     }
   }
+    .value {
+      color: color($colors, value-color);
+      font-weight: bold;
+    }
+    .activity{
+      color: color($colors, activity-color);
+      font-weight: bold;
+      font-size: 15px;
+    }
 }

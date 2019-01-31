@@ -5,13 +5,13 @@ export class Pot {
   description: string[];
   isOpen: boolean;
   value: number;
-  activite: Activite[];
+  activities: Activite[];
 
   constructor(public name: string){
     this.isOpen = true;
     this.description = [];
     this.membres= [];
+    this.activities= [];
     this.value = 0;
-    this.activite= [];
   }
 }

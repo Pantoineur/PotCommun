@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, AlertController, ModalController } from 'ionic-angular';
 import { Pot } from '../../../models/Pot';
 import { PotsService } from '../../../services/pots.service';
 import { NgForm } from '@angular/forms';
@@ -22,8 +22,8 @@ export class SinglePotPage implements OnInit {
   constructor(public navParams: NavParams,
               private viewCtrl: ViewController,
               private potsService: PotsService,
-              private alertCtrl: AlertController) {
-  }
+              private alertCtrl: AlertController,
+              private navCtrl: NavController) {}
 
   ngOnInit(){
     this.index = this.navParams.get('index');
@@ -58,6 +58,9 @@ export class SinglePotPage implements OnInit {
     });
     alert.present();
 }
+
+  calculValue(){
+  }
 
   onSubmitForm(form: NgForm){
     console.log(form.value);

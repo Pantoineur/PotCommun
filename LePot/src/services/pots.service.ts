@@ -9,64 +9,23 @@ export class PotsService{
 
   pots$ = new Subject<Pot[]>();
 
-  potsList: Pot[] = [
-    {
-      name: 'Machine à laver',
-      activite: [
-        new Activite('Courses',50),
-        new Activite('SautParachute',300)
+  potsList: Pot[] = [{
+    membres: [
+        'orencohen2652@gmail.com',
+        'danco2652@gmail.com',
+        'antoineyvan@gmail.com'
       ],
-      membres: [
-        'yvan.antoine84@gmail.com',
-        'orenco@gmail.com',
-        'loicguerin@gmail.com'
-      ],
+      name: 'Barcelone',
       description: [
-        'Volume: 6L',
-        'Temps de lavage: 2 heures',
-        'Consommation: 173kWh/an'
+        'pot commun pour vacances a Barcelone'
       ],
-      isOpen: true,
-      value: 10
-    },
-    {
-      name: 'Télévision',
-
-      activite: [
-        new Activite('Courses',50),
-        new Activite('SautParachute',300)
+      activities: [
+        new Activite('Hotel', 20),
+        new Activite('Avion', 50),
       ],
-      membres: [
-        'yvan.antoine84@gmail.com',
-        'orenco@gmail.com',
-        'loicguerin@gmail.com'
-      ],
-      description: [
-        'Dimensions : 40 pouces',
-        'Consommation : 22kWh/an'
-      ],
-      isOpen: true,
-      value: 10
-    },
-    {
-      name: 'Ordinateur',
-      activite: [
-        new Activite('Courses',50),
-        new Activite('SautParachute',300)
-      ],
-      membres: [
-        'yvan.antoine84@gmail.com',
-        'orenco@gmail.com',
-        'loicguerin@gmail.com'
-      ],
-      description: [
-        'Marque: fait maison',
-        'Consommation: 500kWh/an'
-      ],
-      isOpen: false,
-      value: 10
-    }
-  ];
+      value: 0,
+      isOpen: true
+    }];
 
   addPot(pot: Pot){
     this.potsList.push(pot);

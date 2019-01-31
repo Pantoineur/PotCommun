@@ -42,7 +42,7 @@ export class MyApp {
               this.content.setRoot(TabsPage);
             } else {
               this.isAuth = false;
-              this.content.setRoot(AuthPage, {mode: 'connect'});
+              this.content.setRoot(AuthPage, {mode: 'new'});
             }
           }
         );

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ToastController, LoadingController } from 'ionic-angular';
 import { AuthService } from '../../services/auth.service';
 import {  FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { TabsPage } from '../tabs/tabs';
+import { PotsService } from '../../services/pots.service';
 
 /**
  * Generated class for the AuthPage page.
@@ -26,7 +27,10 @@ export class AuthPage implements OnInit {
               public navParams: NavParams,
               private menuCtrl: MenuController,
               private formBuilder: FormBuilder,
-              private navCtrl: NavController) {
+              private navCtrl: NavController,
+              private toastCtrl: ToastController,
+              private potsService: PotsService,
+              private loadingCtrl: LoadingController) {
   }
 
   ngOnInit() {
@@ -37,6 +41,10 @@ export class AuthPage implements OnInit {
 
   onToggleMenu(){
     this.menuCtrl.open();
+  }
+
+  newUser(){
+    this.navCtrl.push(AuthPage, {mode: 'connect'});
   }
 
   initForm() {
@@ -70,5 +78,28 @@ export class AuthPage implements OnInit {
         }
       );
     }
+    let loader = this.loadingCtrl.create({
+      content: 'Récupération en cours...'
+    });
+    loader.present();
+    this.potsService.retrieveData().then(
+      () => {
+        loader.dismiss();
+        this.toastCtrl.create({
+          message:'Données récupérées !',
+          duration: 3000,
+          position: 'top'
+        }).present();
+      }
+    ).catch(
+      (error)=>{
+        loader.dismiss();
+        this.toastCtrl.create({
+          message:error,
+          duration:3000,
+          position: 'top'
+        }).present();
+      }
+    );
   }
 }

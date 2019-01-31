@@ -26,5 +26,6 @@
     </ion-list>
     <button ion-button full (click)="onSubmitForm()">Soumettre</button>
     <span ion-text color="danger">{{ errorMessage }}</span>
+    <button ion-button full *ngIf="mode === 'new'" (click)="newUser()">Se connecter</button>
   </form>
 </ion-content>

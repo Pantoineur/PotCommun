@@ -4,5 +4,6 @@ export class Activite{
 
   constructor(public name: string, public value: number)
   {
+    this.membre = "";
   }
 }

@@ -22,13 +22,21 @@ export class PotsPage implements OnInit, OnDestroy{
               private menuCtrl: MenuController,
               private navCtrl: NavController,
               private toastCtrl: ToastController,
-              private loadingCtrl: LoadingController) {}
+              private loadingCtrl: LoadingController) {
+              }
 
   ngOnInit(){
     this.potsSubscription = this.potsService.pots$.subscribe(
       (pots: Pot[]) => {
         this.potsList = pots.slice();
-      }
+          for (let i = 0; i < this.potsList.length; i++){
+            this.potsList[i].value = 0;
+            for (let activity of this.potsList[i].activities)
+            {
+              this.potsList[i].value += activity.value;
+            }
+          }
+        }
     );
     this.potsService.emitPots();
   }

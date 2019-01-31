@@ -18,11 +18,28 @@
     </ion-card-content>
   </ion-card>
   <ion-card [ngClass]="{'is-on': pot.isOpen, 'is-off': !pot.isOpen}">
+    <ion-card-header>Montant du pot</ion-card-header>
+    <ion-card-content>
+      <p> {{pot.value}}€</p>
+    </ion-card-content>
+  </ion-card>
+  <ion-card [ngClass]="{'is-on': pot.isOpen, 'is-off': !pot.isOpen}">
     <ion-card-header>Membres</ion-card-header>
     <ion-card-content>
       <p *ngFor="let line of pot.membres">{{line}}</p>
     </ion-card-content>
   </ion-card>
+
+  <ion-card [ngClass]="{'is-on': pot.isOpen, 'is-off': !pot.isOpen}">
+    <ion-card-header>Activités</ion-card-header>
+    <ion-card-content>
+      <p *ngFor="let activity of pot.activities">
+        Membre : <b>{{activity.membre}}</b> <br>
+        <span ngClass="activity">{{activity.name}} </span>
+        <span ngClass="value">{{activity.value}}€ </span></p>
+    </ion-card-content>
+  </ion-card>
+
   <ion-grid>
     <ion-row>
       <ion-col>

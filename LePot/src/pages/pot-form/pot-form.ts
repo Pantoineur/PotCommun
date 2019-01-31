@@ -69,30 +69,30 @@ export class PotFormPage implements OnInit{
   }
 
 
-    onSaveList(){
-      let loader = this.loadingCtrl.create({
-        content: 'Sauvegarde en cours...'
-      });
-      loader.present();
-      this.potsService.saveData().then(
-        () => {
-          loader.dismiss();
-          this.toastCtrl.create({
-            message:'Données sauvegardées !',
-            duration: 3000,
-            position: 'top'
-          }).present();
-        }
-      ).catch(
-        (error)=>{
-          loader.dismiss();
-          this.toastCtrl.create({
-            message:error,
-            duration:3000,
-            position: 'top'
-          }).present();
-        }
-      );
-    }
+  onSaveList(){
+    let loader = this.loadingCtrl.create({
+      content: 'Sauvegarde en cours...'
+    });
+    loader.present();
+    this.potsService.saveData().then(
+      () => {
+        loader.dismiss();
+        this.toastCtrl.create({
+          message:'Données sauvegardées !',
+          duration: 3000,
+          position: 'top'
+        }).present();
+      }
+    ).catch(
+      (error)=>{
+        loader.dismiss();
+        this.toastCtrl.create({
+          message:error,
+          duration:3000,
+          position: 'top'
+        }).present();
+      }
+    );
+  }
 
 }

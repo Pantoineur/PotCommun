@@ -15,6 +15,7 @@
       (click)="onLoadPot(i)">
       <ion-icon name="paper" [color]="pot.isOpen ? 'secondary': 'danger'"></ion-icon>
       {{pot.name}}
+      <p>Montant : {{pot.value}}€</p>
     </button>
   </ion-list>
   <button ion-button full (click)="onNewPot()">Nouveau pot</button>
