@@ -7,11 +7,11 @@
   <ion-content>
     <ion-list>
       <button ion-item icon-start (click)="onNavigate(tabsPage)" *ngIf="isAuth">
-        <ion-icon name="power"></ion-icon>
+        <ion-icon name="cash"></ion-icon>
         Pots
       </button>
       <button ion-item icon-start (click)="onNavigate(optionsPage)" *ngIf="isAuth">
-        <ion-icon name="options"></ion-icon>
+        <ion-icon name="settings"></ion-icon>
         Options
       </button>
       <button ion-item icon-start (click)="onNavigate(authPage, {mode: 'new'})" *ngIf="!isAuth">

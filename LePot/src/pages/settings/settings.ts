@@ -14,15 +14,15 @@ export class SettingsPage {
 
   onToggleLights(){
     let alert = this.alertCtrl.create({
-      title: 'Êtes-vous certain de vouloir continuer?',
-      subTitle: 'Cette action ouvrira ou fermera tous vos pots !',
+      title: 'Êtes-vous certain de vouloir supprimer un pote ?',
+      subTitle: 'Cette action supprimera votre pote et tous les pots en cours avec lui',
       buttons: [
         {
           text: 'Annuler',
           role: 'cancel'
         },
         {
-          text: 'Confimer',
+          text: 'Confirmer',
           handler: () => console.log('Confirmé !')
         }
       ]
