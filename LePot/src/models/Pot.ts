@@ -14,4 +14,10 @@ export class Pot {
     this.activities= [];
     this.value = 0;
   }
+
+/*  getCurrentValue(){
+    for(let activity of this.activities){
+      this.value += activity.value;
+    }
+  }*/
 }

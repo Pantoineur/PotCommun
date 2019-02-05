@@ -1,9 +1,16 @@
+import * as firebase from "firebase";
 
 export class Activite{
-  membre: string;
-
+  creator: string
   constructor(public name: string, public value: number)
   {
-    this.membre = "";
+    this.creator = '';
+    this.getCurrentUser();
   }
+
+  getCurrentUser(){
+    let user = firebase.auth().currentUser;
+    this.creator = user.email;
+  }
+
 }

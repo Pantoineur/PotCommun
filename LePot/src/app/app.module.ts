@@ -15,6 +15,9 @@ import { OptionsPage } from '../pages/options/options';
 import { PotFormPage } from '../pages/pot-form/pot-form';
 import { AuthService } from '../services/auth.service';
 import { AuthPage } from '../pages/auth/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [

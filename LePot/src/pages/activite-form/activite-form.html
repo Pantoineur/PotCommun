@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Nouvelle activité</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="activityForm">
+    <ion-list>
+      <ion-item-divider>Informations</ion-item-divider>
+      <ion-item>
+        <ion-label>Nom</ion-label>
+        <ion-input placeholder="Courses, location..." formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Argent placé</ion-label>
+        <ion-input placeholder="50€..." formControlName="value"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button full color="secondary" (click)="onSubmitForm()">Ajouter l'activité</button>
+  </form>
+</ion-content>

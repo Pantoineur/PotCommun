@@ -5,16 +5,18 @@ import { PotsService } from '../../services/pots.service';
 import { Pot } from '../../models/Pot';
 import { PotFormPage } from '../pot-form/pot-form';
 import { Subscription } from 'rxjs/Subscription';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'page-pots',
   templateUrl: 'pots.html'
 })
 export class PotsPage implements OnInit, OnDestroy{
-  [x: string]: any;
 
   potsList: Pot[];
   potsSubscription: Subscription;
+  mail: string;
 
 
   constructor(private modalCtrl: ModalController,
@@ -39,11 +41,17 @@ export class PotsPage implements OnInit, OnDestroy{
         }
     );
     this.potsService.emitPots();
+    //this.retrieveCurrentUser();
   }
 
   onLoadPot(index: number) {
     let modal = this.modalCtrl.create(SinglePotPage, {index: index});
     modal.present();
+  }
+
+  retrieveCurrentUser(){
+    let user = firebase.auth().currentUser;
+    this.mail = user.email;
   }
 
   onToggleMenu(){
