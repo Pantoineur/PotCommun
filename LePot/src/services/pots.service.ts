@@ -10,7 +10,21 @@ export class PotsService{
 
   pots$ = new Subject<Pot[]>();
 
-  potsList: Pot[] = [];
+  potsList: Pot[] = [{
+    name: 'test',
+    value: 0,
+    membres: [
+      'test@test.fr'
+    ],
+    inActivities:[
+      new InnerActivite('oui',50,'test@test.fr')
+    ],
+    isOpen: true,
+    description: [
+      'oui',
+    ],
+    isUserInPot: false
+  }];
 
   addPot(pot: Pot){
     this.potsList.push(pot);

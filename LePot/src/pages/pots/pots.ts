@@ -30,8 +30,9 @@ export class PotsPage implements OnInit, OnDestroy{
               }
 
   ngOnInit(){
+    this.potsService.saveData();
     this.retrieveCurrentUser();
-    this.potsSubscription = this.potsService.pots$.subscribe(
+      this.potsSubscription = this.potsService.pots$.subscribe(
       (pots: Pot[]) => {
         this.potsList = pots.slice();
           for (let i=0; i<this.potsList.length; i++){
@@ -47,10 +48,9 @@ export class PotsPage implements OnInit, OnDestroy{
           }
         this.potsService.calculValue();
         }
-    );
-    this.potsService.emitPots();
-    this.onFetchPotList();
-    //this.retrieveCurrentUser();
+      );
+      this.potsService.emitPots();
+      this.onFetchPotList();
   }
 
   onLoadPot(index: number) {
