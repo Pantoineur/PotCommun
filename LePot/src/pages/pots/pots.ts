@@ -17,6 +17,7 @@ export class PotsPage implements OnInit, OnDestroy{
 
   potsList: Pot[];
   potsSubscription: Subscription;
+  mail: string;
 
 
   constructor(private modalCtrl: ModalController,
@@ -29,19 +30,21 @@ export class PotsPage implements OnInit, OnDestroy{
               }
 
   ngOnInit(){
-    this.potsService.retrieveCurrentUser();
+    this.retrieveCurrentUser();
     this.potsSubscription = this.potsService.pots$.subscribe(
       (pots: Pot[]) => {
         this.potsList = pots.slice();
-        for (let i=0; i<this.potsList.length; i++){
-          if (this.potsList[i].membres === undefined)
-            this.potsList[i].membres = [];
-          for (let j=0; j<this.potsList[i].membres.length; j++){
-            if (this.potsService.mail === this.potsList[i].membres[j]){
-              this.potsList[i].isUserInPot = true;
+          for (let i=0; i<this.potsList.length; i++){
+            console.log(this.mail);
+            this.potsList[i].isUserInPot = false;
+            if (this.potsList[i].membres === undefined)
+              this.potsList[i].membres = [];
+            for (let j=0; j<this.potsList[i].membres.length; j++){
+              if (this.mail === this.potsList[i].membres[j]){
+                this.potsList[i].isUserInPot = true;
+              }
             }
           }
-        }
         this.potsService.calculValue();
         }
     );
@@ -53,6 +56,12 @@ export class PotsPage implements OnInit, OnDestroy{
   onLoadPot(index: number) {
     let modal = this.modalCtrl.create(SinglePotPage, {index: index});
     modal.present();
+  }
+
+
+  retrieveCurrentUser(){
+    let user = firebase.auth().currentUser;
+    this.mail = user.email;
   }
 
   onToggleMenu(){
@@ -138,7 +147,8 @@ export class PotsPage implements OnInit, OnDestroy{
 
 
   ngOnDestroy() {
-    this.potsSubscription.unsubscribe();
+    if (this.potsSubscription != undefined)
+      this.potsSubscription.unsubscribe();
   }
 
 }

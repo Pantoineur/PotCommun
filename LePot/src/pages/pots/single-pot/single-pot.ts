@@ -39,7 +39,6 @@ export class SinglePotPage implements OnInit {
   ngOnInit(){
     this.index = this.navParams.get('index');
     this.pot = this.potsService.potsList[this.index];
-    console.log(this.activitesService.activiteList);
   }
 
   dismissModal(){
@@ -80,7 +79,6 @@ export class SinglePotPage implements OnInit {
   }
 
   onSubmitForm(form: NgForm){
-    console.log(form.value);
     this.dismissModal();
   }
 

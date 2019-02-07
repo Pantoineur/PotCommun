@@ -64,7 +64,6 @@ export class PotFormPage implements OnInit{
       newPot.membres.push(control.value);
     }
     newPot.value = 0;
-    console.log(newPot);
     this.potsService.addPot(newPot);
     this.onSaveList();
     this.navCtrl.pop();

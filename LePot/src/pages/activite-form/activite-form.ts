@@ -40,8 +40,6 @@ export class ActivityFormPage implements OnInit{
     let user = firebase.auth().currentUser;
     let creator = user.email;
     let newActivity = new InnerActivite(this.activityForm.get('name').value, this.activityForm.get('value').value, creator);
-    console.log(this.index);
-    console.log(this.potsService.potsList[this.index]);
     if (this.potsService.potsList[this.index].inActivities === undefined)
     {
       this.potsService.potsList[this.index].inActivities = [];

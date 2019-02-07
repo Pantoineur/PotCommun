@@ -5,24 +5,27 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>Ajout de potes</ion-title>
+    <ion-title>Mes Remboursements</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-<ion-card>
-  <ion-card-content>
-  <button ion-button icon-start><ion-icon name="people"></ion-icon>
-        Ajouter un pote
-  </button>
+  <ion-card>
+    <ion-card-header>A qui je dois combien</ion-card-header>
+    <ion-card-content *ngFor="let number of jeRembourse; let i = index">
+      <ng-container *ngIf="this.potsList[i].isUserInPot">
+        <p *ngIf="number != 0">Pour le pot {{this.potsList[i].name}}, je dois : {{number}}€</p>
+        <p *ngIf="number === 0">Pour le pot {{this.potsList[i].name}}, je dois rien à personne</p>
+      </ng-container>
     </ion-card-content>
-
-
-<ion-card-content>
-  <button ion-button icon-start color="danger" (click)="onToggleLights()">
-    <ion-icon name="close"></ion-icon>
-    Supprimer un pote
-  </button>
-</ion-card-content>
-</ion-card>
+  </ion-card>
+    <ion-card>
+      <ion-card-header>Qui me doit combien</ion-card-header>
+      <ion-card-content *ngFor="let number of onMeRembourse; let i = index">
+        <ng-container *ngIf="this.potsList[i].isUserInPot">
+          <p *ngIf="number != 0">Pour le pot {{this.potsList[i].name}}, on me doit : {{number}}€</p>
+          <p *ngIf="number === 0">Pour le pot {{this.potsList[i].name}}, on ne me doit rien ! </p>
+        </ng-container>
+      </ion-card-content>
+    </ion-card>
 </ion-content>

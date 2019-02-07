@@ -13,7 +13,7 @@
   <ion-list>
     <ng-container  *ngFor="let pot of potsList; let i = index">
       <button ion-item icon-start
-        *ngIf='pot.isUserInPot'
+        *ngIf="pot.isUserInPot"
         (click)="onLoadPot(i)">
         <ion-icon name="paper" [color]="pot.isOpen ? 'secondary': 'danger'"></ion-icon>
         {{pot.name}}
