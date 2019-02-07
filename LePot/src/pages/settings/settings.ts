@@ -115,18 +115,4 @@ export class SettingsPage implements OnInit, OnDestroy{
       }
     }
   }
-
-  doRefresh(){
-    for (let i=0; i<this.potsList.length; i++)
-    {
-      if (this.inputMoney[i] < this.averageMoney[i])
-      {
-        this.jeRembourse[i] = this.averageMoney[i] - this.inputMoney[i];
-      }
-      else
-      {
-        this.onMeRembourse[i] = this.inputMoney[i] - this.averageMoney[i];
-      }
-    }
-  }
 }

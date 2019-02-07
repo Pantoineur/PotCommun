@@ -42,6 +42,7 @@ export class MembreFormPage implements OnInit{
       this.potsService.potsList[this.index].membres = [];
     }
     this.potsService.potsList[this.index].membres.push(newMembre);
+    this.potsService.saveData();
     this.navCtrl.pop();
   }
 

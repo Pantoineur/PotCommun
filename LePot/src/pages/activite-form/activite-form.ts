@@ -45,6 +45,7 @@ export class ActivityFormPage implements OnInit{
       this.potsService.potsList[this.index].inActivities = [];
     }
     this.potsService.potsList[this.index].inActivities.push(newActivity);
+    this.potsService.saveData();
     this.potsService.calculValue();
     this.navCtrl.pop();
   }
