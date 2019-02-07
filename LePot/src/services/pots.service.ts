@@ -29,12 +29,12 @@ export class PotsService{
     }];
 
   addPot(pot: Pot){
+    pot.membres.push(this.mail);
     this.potsList.push(pot);
     this.emitPots();
   }
 
   emitPots(){
-    console.log("emitPots");
     this.pots$.next(this.potsList.slice());
   }
 
@@ -42,7 +42,7 @@ export class PotsService{
     let user = firebase.auth().currentUser;
     this.mail = user.email;
   }
-  
+
   calculValue(){
     for(let i = 0; i < this.potsList.length; i++)
     {

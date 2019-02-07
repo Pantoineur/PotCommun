@@ -46,6 +46,7 @@ export class PotsPage implements OnInit, OnDestroy{
         }
     );
     this.potsService.emitPots();
+    this.onFetchPotList();
     //this.retrieveCurrentUser();
   }
 
