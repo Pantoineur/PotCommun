@@ -7,6 +7,7 @@ import { PotFormPage } from '../pot-form/pot-form';
 import { Subscription } from 'rxjs/Subscription';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase';
+import { ActivitesService } from '../../services/activite.service';
 
 @Component({
   selector: 'page-pots',
@@ -16,7 +17,6 @@ export class PotsPage implements OnInit, OnDestroy{
 
   potsList: Pot[];
   potsSubscription: Subscription;
-  mail: string;
 
 
   constructor(private modalCtrl: ModalController,
@@ -24,20 +24,25 @@ export class PotsPage implements OnInit, OnDestroy{
               private menuCtrl: MenuController,
               private navCtrl: NavController,
               private toastCtrl: ToastController,
-              private loadingCtrl: LoadingController) {
+              private loadingCtrl: LoadingController,
+              private activitesService: ActivitesService) {
               }
 
   ngOnInit(){
+    this.potsService.retrieveCurrentUser();
     this.potsSubscription = this.potsService.pots$.subscribe(
       (pots: Pot[]) => {
         this.potsList = pots.slice();
-          for (let i = 0; i < this.potsList.length; i++){
-            this.potsList[i].value = 0;
-            for (let activity of this.potsList[i].activities)
-            {
-              this.potsList[i].value += activity.value;
+        for (let i=0; i<this.potsList.length; i++){
+          if (this.potsList[i].membres === undefined)
+            this.potsList[i].membres = [];
+          for (let j=0; j<this.potsList[i].membres.length; j++){
+            if (this.potsService.mail === this.potsList[i].membres[j]){
+              this.potsList[i].isUserInPot = true;
             }
           }
+        }
+        this.potsService.calculValue();
         }
     );
     this.potsService.emitPots();
@@ -49,11 +54,6 @@ export class PotsPage implements OnInit, OnDestroy{
     modal.present();
   }
 
-  retrieveCurrentUser(){
-    let user = firebase.auth().currentUser;
-    this.mail = user.email;
-  }
-
   onToggleMenu(){
     this.menuCtrl.open();
   }
@@ -62,7 +62,7 @@ export class PotsPage implements OnInit, OnDestroy{
     this.navCtrl.push(PotFormPage);
   }
 
-  onSaveList(){
+  onSavePotList(){
     let loader = this.loadingCtrl.create({
       content: 'Sauvegarde en cours...'
     });
@@ -72,7 +72,7 @@ export class PotsPage implements OnInit, OnDestroy{
         loader.dismiss();
         this.toastCtrl.create({
           message:'Données sauvegardées !',
-          duration: 3000,
+          duration: 1000,
           position: 'top'
         }).present();
       }
@@ -88,7 +88,7 @@ export class PotsPage implements OnInit, OnDestroy{
     );
   }
 
-  onFetchList(){
+  onFetchPotList(){
     let loader = this.loadingCtrl.create({
       content: 'Récupération en cours...'
     });
@@ -98,7 +98,7 @@ export class PotsPage implements OnInit, OnDestroy{
         loader.dismiss();
         this.toastCtrl.create({
           message:'Données récupérées !',
-          duration: 3000,
+          duration: 1000,
           position: 'top'
         }).present();
       }
@@ -113,6 +113,28 @@ export class PotsPage implements OnInit, OnDestroy{
       }
     );
   }
+
+  /*onFetchActivitesList(){
+    let loader = this.loadingCtrl.create({
+      content: 'Récupération en cours...'
+    });
+    loader.present();
+    this.activitesService.retrieveData(this.potsService.potsList).then(
+      () => {
+        loader.dismiss();
+      }
+    ).catch(
+      (error)=>{
+        loader.dismiss();
+        this.toastCtrl.create({
+          message:error,
+          duration:3000,
+          position: 'top'
+        }).present();
+      }
+    );
+  }*/
+
 
   ngOnDestroy() {
     this.potsSubscription.unsubscribe();

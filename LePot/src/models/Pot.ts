@@ -1,18 +1,20 @@
-import { Activite } from "./Activite";
+import { InnerActivite } from "./InnerActivite";
 
 export class Pot {
   membres: string[];
   description: string[];
   isOpen: boolean;
   value: number;
-  activities: Activite[];
+  inActivities: InnerActivite[];
+  isUserInPot : boolean;
 
   constructor(public name: string){
     this.isOpen = true;
     this.description = [];
     this.membres= [];
-    this.activities= [];
     this.value = 0;
+    this.inActivities = [];
+    this.isUserInPot = false;
   }
 
 /*  getCurrentValue(){

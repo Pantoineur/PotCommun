@@ -11,21 +11,24 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item icon-start *ngFor="let pot of potsList; let i = index"
-      (click)="onLoadPot(i)">
-      <ion-icon name="paper" [color]="pot.isOpen ? 'secondary': 'danger'"></ion-icon>
-      {{pot.name}}
-      <p>Montant : {{pot.value}}€</p>
-    </button>
+    <ng-container  *ngFor="let pot of potsList; let i = index">
+      <button ion-item icon-start
+        *ngIf='pot.isUserInPot'
+        (click)="onLoadPot(i)">
+        <ion-icon name="paper" [color]="pot.isOpen ? 'secondary': 'danger'"></ion-icon>
+        {{pot.name}}
+        <p>Montant : {{pot.value}}€</p>
+      </button>
+    </ng-container>
   </ion-list>
   <button ion-button full (click)="onNewPot()">Nouveau pot</button>
   <ion-card>
     <ion-card-header>Données</ion-card-header>
     <ion-card-content>
-      <button ion-button block outline (click)="onSaveList()">Enregistrer</button>
+      <button ion-button block outline (click)="onSavePotList()">Enregistrer</button>
     </ion-card-content>
     <ion-card-content>
-      <button ion-button block outline (click)="onFetchList()">Récupérer</button>
+      <button ion-button block outline (click)="onFetchPotList()">Récupérer</button>
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -1,11 +1,8 @@
 import * as firebase from "firebase";
-import { InnerActivite } from "./InnerActivite";
 
-export class Activite{
-  inActivities: InnerActivite[];
-  constructor()
+export class InnerActivite{
+  constructor(public name: string, public value: number, public creator: string)
   {
-    this.inActivities = [];
     //this.getCurrentUser();
   }
 

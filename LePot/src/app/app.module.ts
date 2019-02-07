@@ -13,11 +13,14 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { PotsService } from '../services/pots.service';
 import { OptionsPage } from '../pages/options/options';
 import { PotFormPage } from '../pages/pot-form/pot-form';
+import { MembreFormPage } from '../pages/membre-form/membre-form';
 import { AuthService } from '../services/auth.service';
 import { AuthPage } from '../pages/auth/auth';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabaseModule, AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ActivityFormPage } from '../pages/activite-form/activite-form';
+import { ActivitesService } from '../services/activite.service';
 
 @NgModule({
   declarations: [
@@ -29,6 +32,8 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     TabsPage,
     OptionsPage,
     PotFormPage,
+    ActivityFormPage,
+    MembreFormPage,
     AuthPage
   ],
   imports: [
@@ -45,12 +50,15 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     TabsPage,
     OptionsPage,
     PotFormPage,
+    ActivityFormPage,
+    MembreFormPage,
     AuthPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     PotsService,
+    ActivitesService,
     AuthService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
 

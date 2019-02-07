@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Nouveau pote</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="membreForm">
+    <ion-list>
+      <ion-item-divider>Informations de ton pote</ion-item-divider>
+      <ion-item>
+        <ion-label>Email de ton pote</ion-label>
+        <ion-input placeholder="monPote@lespots.com..." formControlName="mail"></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button full color="secondary" (click)="onSubmitForm()">Ajouter le pote</button>
+  </form>
+</ion-content>

@@ -1,8 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, NavParams, ViewController, AlertController, ModalController } from 'ionic-angular';
+import { NavController, NavParams, ViewController, AlertController, ModalController, LoadingController, ToastController } from 'ionic-angular';
 import { Pot } from '../../../models/Pot';
 import { PotsService } from '../../../services/pots.service';
 import { NgForm } from '@angular/forms';
+import { ActivityFormPage } from '../../activite-form/activite-form';
+import { ActivitesService } from '../../../services/activite.service';
+import { Activite } from '../../../models/Activite';
+import { Subscription } from 'rxjs';
+import { InnerActivite } from '../../../models/InnerActivite';
+import { MembreFormPage } from '../../membre-form/membre-form';
 
 /**
  * Generated class for the SinglePotPage page.
@@ -16,18 +22,24 @@ import { NgForm } from '@angular/forms';
   templateUrl: 'single-pot.html',
 })
 export class SinglePotPage implements OnInit {
-  index: number
+  index: number;
   pot: Pot;
+  activiteSubscription: Subscription;
+
 
   constructor(public navParams: NavParams,
               private viewCtrl: ViewController,
               private potsService: PotsService,
               private alertCtrl: AlertController,
-              private navCtrl: NavController) {}
+              private navCtrl: NavController,
+              private activitesService: ActivitesService,
+              private loadingCtrl: LoadingController,
+              private toastCtrl: ToastController) {}
 
   ngOnInit(){
     this.index = this.navParams.get('index');
     this.pot = this.potsService.potsList[this.index];
+    console.log(this.activitesService.activiteList);
   }
 
   dismissModal(){
@@ -51,7 +63,7 @@ export class SinglePotPage implements OnInit {
           role: 'cancel'
         },
         {
-          text: 'Confimer',
+          text: 'Confirmer',
           handler: () => {this.pot.isOpen = !this.pot.isOpen;}
         }
       ]
@@ -59,7 +71,12 @@ export class SinglePotPage implements OnInit {
     alert.present();
 }
 
-  calculValue(){
+  onNewActivity(){
+    this.navCtrl.push(ActivityFormPage, {'id': this.index});
+  }
+
+  onNewMembre(){
+    this.navCtrl.push(MembreFormPage, {'id': this.index});
   }
 
   onSubmitForm(form: NgForm){
