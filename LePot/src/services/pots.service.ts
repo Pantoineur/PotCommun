@@ -9,12 +9,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class PotsService{
 
   pots$ = new Subject<Pot[]>();
-  mail: string;
 
   potsList: Pot[] = [];
 
   addPot(pot: Pot){
-    pot.membres.push(this.mail);
     this.potsList.push(pot);
     this.emitPots();
   }

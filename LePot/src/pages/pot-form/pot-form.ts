@@ -3,6 +3,7 @@ import { Validators, FormBuilder, FormGroup, FormArray } from "@angular/forms";
 import { PotsService } from "../../services/pots.service";
 import { Pot } from "../../models/Pot";
 import { NavController, ToastController, LoadingController } from "ionic-angular";
+import * as firebase from "firebase";
 
 @Component({
   selector: 'page-pot-form',
@@ -10,6 +11,7 @@ import { NavController, ToastController, LoadingController } from "ionic-angular
 })
 export class PotFormPage implements OnInit{
   potForm: FormGroup;
+  mail: string;
 
   constructor(private formBuilder: FormBuilder,
               private potsService: PotsService,
@@ -22,11 +24,17 @@ export class PotFormPage implements OnInit{
   }
 
   initForm(){
+    this.retrieveCurrentUser();
     this.potForm = this.formBuilder.group({
       name:['', Validators.required],
       description: this.formBuilder.array([]),
       membres: this.formBuilder.array([])
     });
+  }
+
+  retrieveCurrentUser(){
+    let user = firebase.auth().currentUser;
+    this.mail = user.email;
   }
 
   getDescriptionArray(){
@@ -64,36 +72,10 @@ export class PotFormPage implements OnInit{
       newPot.membres.push(control.value);
     }
     newPot.value = 0;
+    newPot.membres.push(this.mail);
     this.potsService.addPot(newPot);
-    this.onSaveList();
+    this.potsService.saveData();
     this.navCtrl.pop();
-  }
-
-
-  onSaveList(){
-    let loader = this.loadingCtrl.create({
-      content: 'Sauvegarde en cours...'
-    });
-    loader.present();
-    this.potsService.saveData().then(
-      () => {
-        loader.dismiss();
-        this.toastCtrl.create({
-          message:'Données sauvegardées !',
-          duration: 3000,
-          position: 'top'
-        }).present();
-      }
-    ).catch(
-      (error)=>{
-        loader.dismiss();
-        this.toastCtrl.create({
-          message:error,
-          duration:3000,
-          position: 'top'
-        }).present();
-      }
-    );
   }
 
 }
